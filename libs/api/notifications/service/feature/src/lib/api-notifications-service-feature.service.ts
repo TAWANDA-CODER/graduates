@@ -17,26 +17,18 @@ import {
 }
 from './commands/api-notifications-service-commands.command'
 import { QueryBus, CommandBus, EventBus } from '@nestjs/cqrs';
-import { User } from '@graduates/api/authentication/api/shared/interfaces/data-access';
+import { AuthenticationUser } from '@graduates/api/authentication/api/shared/interfaces/data-access';
 import { ModuleRef } from '@nestjs/core';
 
 
 @Injectable()
 export class ApiNotificationsService 
-// implements OnModuleInit 
 {
-//   private tempQueryBus : QueryBus;
-//   private tempCommaBus : CommandBus;
-//   private tempEventBus : EventBus;
 
-//   async onModuleInit() {
-//         this.tempQueryBus = await this.moduleRef.get(QueryBus);
-//         this.tempCommaBus = await this.moduleRef.get(CommandBus);
-//         this.tempEventBus = await this.moduleRef.get(EventBus);
-//     }
     constructor(
         private readonly queryBus:QueryBus,
         private readonly commandBus:CommandBus,
+        // private readonly eventBus:EventBus,
         private moduleRef: ModuleRef
     ){}
 
@@ -72,8 +64,8 @@ export class ApiNotificationsService
     async updateSeen(id:string, seen:boolean) : Promise<Notification> {
         return await this.commandBus.execute(new UpdateSeenCommand(id,seen));
     }
-    
-    async getUserObject(userId: string) : Promise<User> {
+
+    async getUserObject(userId: string) : Promise<AuthenticationUser> {
         return await this.queryBus.execute(new GetUserObjectQuery(userId))
     }
     
@@ -99,9 +91,9 @@ export class ApiNotificationsService
         const  subject = "Graduates: Request for your Academic Record"
         this.sendToMail(userEmailFrom,userEmailTo, subject, message)
     }
-    
-    async currentUser(): Promise<User[]>{
-        const  currentUser = new User();
+
+    async currentUser(): Promise<AuthenticationUser[]>{
+        const  currentUser = new AuthenticationUser();
         currentUser.id = '1';
         currentUser.name = 'John';
         currentUser.email = 'JohnDoe@gmail.com';
@@ -109,24 +101,24 @@ export class ApiNotificationsService
     }
 
     async getNameFromID(id:string){
-        const currentUser = new User();
-        currentUser.id = id;
+        const currentUser = new AuthenticationUser();
+        currentUser.id = '2';
         currentUser.name = 'T';
         currentUser.email = 'madunathabo2@gmail.com';
         return currentUser.name
     }
 
     async getEmailFromID(id:string){
-        const currentUser = new User();
-        currentUser.id = id;
+        const currentUser = new AuthenticationUser();
+        currentUser.id = '3';
         currentUser.name = 'T';
         currentUser.email = 'madunathabo2@gmail.com';
         return currentUser.email
     }
 
     async emailToUser(){
-        const  user = new User();
-        user.id = '2';
+        const  user = new AuthenticationUser();
+        user.id = '4';
         user.name = 'emailer';
         user.email = 'JohnDoe@gmail.com';
         return [ user ];

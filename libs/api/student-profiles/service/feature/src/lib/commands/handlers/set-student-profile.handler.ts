@@ -7,64 +7,64 @@ import { SetStudentProfileBioCommand, SetStudentProfileDegreeNameCommand, SetStu
 
 @CommandHandler(SetStudentProfileNameCommand)
 export class SetStudentProfileNameHandler implements ICommandHandler<SetStudentProfileNameCommand> {
-  constructor(private repository: StudentProfilesRepository, private publisher: EventPublisher) {} 
+  constructor(private repository: StudentProfilesRepository, private publisher: EventPublisher) {}
 
-  async execute({id, name}: SetStudentProfileNameCommand) { 
-    const profile = this.publisher.mergeObjectContext(await this.repository.setName(id, name) as any);
-    profile.apply(new SetStudentProfileNameEvent(
-        id,
-        name
-    ));
+  async execute({id, name}: SetStudentProfileNameCommand) {
+    const profile = await this.publisher.mergeObjectContext(await this.repository.setName(id, name) as any)
+    // profile.apply(new SetStudentProfileNameEvent(
+    //     id,
+    //     name
+    // ));
 
-    profile.commit();
+    // profile.commit();
     return {id, name} as Partial<StudentProfile>;
   }
 }
 
 @CommandHandler(SetStudentProfileProfilePictureCommand)
 export class SetStudentProfileProfilePictureHandler implements ICommandHandler<SetStudentProfileProfilePictureCommand> {
-  constructor(private repository: StudentProfilesRepository, private publisher: EventPublisher) {} 
+  constructor(private repository: StudentProfilesRepository, private publisher: EventPublisher) {}
 
-  async execute({id, pfp}: SetStudentProfileProfilePictureCommand) { 
+  async execute({id, pfp}: SetStudentProfileProfilePictureCommand) {
     const profile = this.publisher.mergeObjectContext(await this.repository.setPfp(id, pfp) as any);
-    profile.apply(new SetStudentProfileProfilePictureEvent(
-        id,
-        pfp
-    ));
+    // profile.apply(new SetStudentProfileProfilePictureEvent(
+    //     id,
+    //     pfp
+    // ));
 
-    profile.commit();
+    // profile.commit();
     return {id, pfp} as Partial<StudentProfile>;
   }
 }
 
 @CommandHandler(SetStudentProfileBioCommand)
 export class SetStudentProfileBioHandler implements ICommandHandler<SetStudentProfileBioCommand> {
-  constructor(private repository: StudentProfilesRepository, private publisher: EventPublisher) {} 
+  constructor(private repository: StudentProfilesRepository, private publisher: EventPublisher) {}
 
-  async execute({id, bio}: SetStudentProfileBioCommand) { 
+  async execute({id, bio}: SetStudentProfileBioCommand) {
     const profile = this.publisher.mergeObjectContext(await this.repository.setBio(id, bio) as any);
-    profile.apply(new SetStudentProfileBioEvent(
-        id,
-        bio
-    ));
+    // profile.apply(new SetStudentProfileBioEvent(
+    //     id,
+    //     bio
+    // ));
 
-    profile.commit();
+    // profile.commit();
     return {id, bio} as Partial<StudentProfile>;
   }
 }
 
 @CommandHandler(SetStudentProfileTagsCommand)
 export class SetStudentProfileTagsHandler implements ICommandHandler<SetStudentProfileTagsCommand> {
-  constructor(private repository: StudentProfilesRepository, private publisher: EventPublisher) {} 
+  constructor(private repository: StudentProfilesRepository, private publisher: EventPublisher) {}
 
-  async execute({id, tags}: SetStudentProfileTagsCommand) { 
+  async execute({id, tags}: SetStudentProfileTagsCommand) {
     const profile = this.publisher.mergeObjectContext(await this.repository.addTag(id, tags) as any);
-    profile.apply(new SetStudentProfileTagsEvent(
-        id,
-        tags
-    ));
+    // profile.apply(new SetStudentProfileTagsEvent(
+    //     id,
+    //     tags
+    // ));
 
-    profile.commit();
+    // profile.commit();
     return {id, tags} as Partial<StudentProfile>;
   }
 }
@@ -72,58 +72,58 @@ export class SetStudentProfileTagsHandler implements ICommandHandler<SetStudentP
 
 @CommandHandler(SetStudentProfileSocialMediaCommand)
 export class SetStudentProfileSocialMediaHandler implements ICommandHandler<SetStudentProfileSocialMediaCommand> {
-  constructor(private repository: StudentProfilesRepository, private publisher: EventPublisher) {} 
+  constructor(private repository: StudentProfilesRepository, private publisher: EventPublisher) {}
 
-  async execute({id, type, link}: SetStudentProfileSocialMediaCommand) { 
+  async execute({id, type, link}: SetStudentProfileSocialMediaCommand) {
     const profile = this.publisher.mergeObjectContext(await this.repository.addSocialMedia(id, type, link) as any);
-    profile.apply(new SetStudentProfileSocialMediaEvent(
-        id,
-        type,
-        link
-    ));
+    // profile.apply(new SetStudentProfileSocialMediaEvent(
+    //     id,
+    //     type,
+    //     link
+    // ));
 
-    profile.commit();
+    // profile.commit();
     return {id, type, link} as Partial<StudentProfile>;
   }
 }
 
 @CommandHandler(SetStudentProfileLocationCommand)
 export class SetStudentProfileLocationHandler implements ICommandHandler<SetStudentProfileLocationCommand> {
-  constructor(private repository: StudentProfilesRepository, private publisher: EventPublisher) {} 
+  constructor(private repository: StudentProfilesRepository, private publisher: EventPublisher) {}
 
-  async execute({id, location}: SetStudentProfileLocationCommand) { 
+  async execute({id, location}: SetStudentProfileLocationCommand) {
     const profile = this.publisher.mergeObjectContext(await this.repository.setLocation(id, location) as any);
-    profile.apply(new SetStudentProfileLocationEvent(
-        id,
-        location
-    ));
+    // profile.apply(new SetStudentProfileLocationEvent(
+    //     id,
+    //     location
+    // ));
 
-    profile.commit();
+    // profile.commit();
     return {id, location} as Partial<StudentProfile>;
   }
 }
 
 @CommandHandler(SetStudentProfileEmailCommand)
 export class SetStudentProfileEmailHandler implements ICommandHandler<SetStudentProfileEmailCommand> {
-  constructor(private repository: StudentProfilesRepository, private publisher: EventPublisher) {} 
+  constructor(private repository: StudentProfilesRepository, private publisher: EventPublisher) {}
 
-  async execute({id, email}: SetStudentProfileEmailCommand) { 
+  async execute({id, email}: SetStudentProfileEmailCommand) {
     const profile = this.publisher.mergeObjectContext(await this.repository.getEmails( email) as any);
-    profile.apply(new SetStudentProfileEmailsEvent(
-        id,
-        email
-    ));
+    // profile.apply(new SetStudentProfileEmailsEvent(
+    //     id,
+    //     email
+    // ));
 
-    profile.commit();
+    // profile.commit();
     return {id, email} as Partial<StudentProfile>;
   }
 }
 
 // @CommandHandler(SetStudentProfileEmploymentStatusCommand)
 // export class SetStudentProfileEmploymentStatusHandler implements ICommandHandler<SetStudentProfileEmploymentStatusCommand> {
-//   constructor(private repository: StudentProfilesRepository, private publisher: EventPublisher) {} 
+//   constructor(private repository: StudentProfilesRepository, private publisher: EventPublisher) {}
 
-//   async execute({id, status}: SetStudentProfileEmploymentStatusCommand) { 
+//   async execute({id, status}: SetStudentProfileEmploymentStatusCommand) {
 //     const profile = this.publisher.mergeObjectContext(await this.repository.setEmploymentStatus(id, status) as any);
 //     profile.apply(new SetStudentProfileEmploymentStatusEvent(
 //         id,
@@ -137,9 +137,9 @@ export class SetStudentProfileEmailHandler implements ICommandHandler<SetStudent
 
 // @CommandHandler(SetStudentProfilePhoneNumberCommand)
 // export class SetStudentProfilePhoneNumberHandler implements ICommandHandler<SetStudentProfilePhoneNumberCommand> {
-//   constructor(private repository: StudentProfilesRepository, private publisher: EventPublisher) {} 
+//   constructor(private repository: StudentProfilesRepository, private publisher: EventPublisher) {}
 
-//   async execute({id, phoneNumber}: SetStudentProfilePhoneNumberCommand) { 
+//   async execute({id, phoneNumber}: SetStudentProfilePhoneNumberCommand) {
 //     const profile = this.publisher.mergeObjectContext(await this.repository.setPhoneNumber(id, phoneNumber) as any);
 //     profile.apply(new SetStudentProfilePhoneNumberEvent(
 //         id,
@@ -153,9 +153,9 @@ export class SetStudentProfileEmailHandler implements ICommandHandler<SetStudent
 
 // @CommandHandler(SetStudentProfileDegreeNameCommand)
 // export class SetStudentProfileDegreeNameHandler implements ICommandHandler<SetStudentProfileDegreeNameCommand> {
-//   constructor(private repository: SetStudentProfileDegreeNameCommand, private publisher: EventPublisher) {} 
+//   constructor(private repository: SetStudentProfileDegreeNameCommand, private publisher: EventPublisher) {}
 
-//   async execute({id, degreeName}: SetStudentProfileDegreeNameCommand) { 
+//   async execute({id, degreeName}: SetStudentProfileDegreeNameCommand) {
 //     const profile = this.publisher.mergeObjectContext(await this.repository.setDegreeName(id, degreeName) as any);
 //     profile.apply(new SetStudentProfileEmploymentStatusEvent(
 //         id,
@@ -171,18 +171,18 @@ export class SetStudentProfileEmailHandler implements ICommandHandler<SetStudent
 
 @CommandHandler(SetStudentProfileFilesCommand)
 export class SetStudentProfileFilesHandler implements ICommandHandler<SetStudentProfileFilesCommand> {
-  constructor(private repository: StudentProfilesRepository, private publisher: EventPublisher) {} 
+  constructor(private repository: StudentProfilesRepository, private publisher: EventPublisher) {}
 
-  async execute({id, fileCategory, filePath, fileExtension}: SetStudentProfileFilesCommand) { 
+  async execute({id, fileCategory, filePath, fileExtension}: SetStudentProfileFilesCommand) {
     const profile = this.publisher.mergeObjectContext(await this.repository.addFiles(id, fileCategory, filePath, fileExtension) as any);
-    profile.apply(new SetStudentProfileFilesEvent(
-        id,
-        fileCategory,
-        filePath,
-        fileExtension
-    ));
+    // profile.apply(new SetStudentProfileFilesEvent(
+    //     id,
+    //     fileCategory,
+    //     filePath,
+    //     fileExtension
+    // ));
 
-    profile.commit();
+    // profile.commit();
     return {id, files: {fileCategory, filePath, fileExtension} };
   }
 }
